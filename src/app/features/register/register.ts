@@ -7,7 +7,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -17,6 +18,9 @@ import { RouterLink } from '@angular/router';
 })
 export class Register {
   private readonly formBuilder = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+
   registerForm: FormGroup = this.formBuilder.group(
     {
       name: ['', [Validators.required, Validators.minLength(3)]],
@@ -36,9 +40,20 @@ export class Register {
 
   submitForm(): void {
     if (this.registerForm.valid) {
-      console.log('Form Submitted', this.registerForm.value);
+      this.authService.signUp(this.registerForm.value).subscribe({
+        next: (response) => {
+          if (response.status === 'success') {
+            this.router.navigate(['/login']);
+          }
+          console.log('Registration successful', response);
+        },
+        error: (error) => {
+          console.error('Registration failed', error);
+        },
+      });
     } else {
       console.log('Form is invalid');
+      this.registerForm.markAllAsTouched();
     }
   }
   confirmPassword(group: AbstractControl) {

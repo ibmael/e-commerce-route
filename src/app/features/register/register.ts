@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { register } from 'swiper/element/bundle';
+import { Component, inject } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -8,4 +9,27 @@ import { RouterLink } from '@angular/router';
   templateUrl: './register.html',
   styleUrl: './register.css',
 })
-export class Register {}
+export class Register {
+  private readonly formBuilder = inject(FormBuilder);
+  registerForm: FormGroup = this.formBuilder.group({
+    name: ['', [Validators.required, Validators.minLength(3)]],
+    email: ['', [Validators.required, Validators.email]],
+    password: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/),
+      ],
+    ],
+    rePassword: ['', [Validators.required]],
+    phone: ['', [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)]],
+  });
+
+  submitForm(): void {
+    if (this.registerForm.valid) {
+      console.log('Form Submitted', this.registerForm.value);
+    } else {
+      console.log('Form is invalid');
+    }
+  }
+}

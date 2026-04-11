@@ -12,6 +12,14 @@ export const routes: Routes = [
     title: 'Login to Your Account | Route Store',
   },
   {
+    path: 'forgot-password',
+    loadComponent: () =>
+      import('./features/forget-password/forget-password.component').then(
+        (m) => m.ForgetPasswordComponent,
+      ),
+    title: 'Reset Your Password | Route Store',
+  },
+  {
     path: 'register',
     loadComponent: () => import('./features/register/register').then((m) => m.Register),
     title: 'Create a New Account | Route Store',

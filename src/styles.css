@@ -4,3 +4,7 @@
 @import 'flowbite/src/themes/default';
 @plugin "flowbite/plugin";
 @source "../node_modules/flowbite";
+
+@theme {
+  --color-primary: #00c758;
+}

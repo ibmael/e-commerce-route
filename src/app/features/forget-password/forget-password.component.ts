@@ -1,8 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
-import { email } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
-import e from 'express';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
@@ -31,7 +29,8 @@ export class ForgetPasswordComponent {
       };
       this.authService.forgetPassword(data).subscribe({
         next: (response) => {
-          if (response.status === 'success') {
+          console.log(response);
+          if (response.statusMsg === 'success') {
             this.step.set(2);
           }
         },
@@ -49,7 +48,8 @@ export class ForgetPasswordComponent {
       };
       this.authService.verifyResetCode(data).subscribe({
         next: (response) => {
-          if (response.status === 'success') {
+          console.log(response);
+          if (response.status === 'Success') {
             this.step.set(3);
           }
         },
@@ -65,7 +65,7 @@ export class ForgetPasswordComponent {
       };
       this.authService.resetPassword(data).subscribe({
         next: (response) => {
-          if (response.status === 'success') {
+          if (response.statusMsg === 'success') {
             this.router.navigate(['/login']);
           }
         },

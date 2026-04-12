@@ -1,4 +1,3 @@
-import { register } from 'swiper/element/bundle';
 import { Component, inject } from '@angular/core';
 import {
   AbstractControl,
@@ -42,7 +41,7 @@ export class Register {
     if (this.registerForm.valid) {
       this.authService.signUp(this.registerForm.value).subscribe({
         next: (response) => {
-          if (response.status === 'success') {
+          if (response.message === 'success') {
             this.router.navigate(['/login']);
           }
           console.log('Registration successful', response);

@@ -13,4 +13,7 @@ export class CartService {
       productId: id,
     });
   }
+  getCartData(): Observable<any> {
+    return this.httpClient.get(`${environment.BASE_URL}/api/v2/cart`);
+  }
 }

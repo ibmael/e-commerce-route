@@ -4,8 +4,13 @@ import { authGuard } from './core/auth/gaurds/auth-guard';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'home',
     pathMatch: 'full',
+  },
+  {
+    path: 'home',
+    loadComponent: () => import('./features/home/home').then((m) => m.Home),
+    title: 'Home - Discover Products | Route Store',
   },
   {
     path: 'login',
@@ -25,11 +30,11 @@ export const routes: Routes = [
     loadComponent: () => import('./features/register/register').then((m) => m.Register),
     title: 'Create a New Account | Route Store',
   },
-  {
-    path: 'home',
-    loadComponent: () => import('./features/home/home').then((m) => m.Home),
-    title: 'Home - Discover Products | Route Store',
-  },
+  // {
+  //   path: 'home',
+  //   loadComponent: () => import('./features/home/home').then((m) => m.Home),
+  //   title: 'Home - Discover Products | Route Store',
+  // },
   {
     path: 'shop',
     loadComponent: () => import('./features/shop/shop').then((m) => m.Shop),

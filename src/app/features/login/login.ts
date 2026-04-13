@@ -33,6 +33,7 @@ export class Login {
           if (response.message === 'success') {
             localStorage.setItem('freshToken', response.token);
             localStorage.setItem('freshUser', JSON.stringify(response.user));
+            this.authService.isLogged.set(true);
             this.router.navigate(['/home']);
           }
         },

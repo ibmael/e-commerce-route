@@ -112,22 +112,30 @@
       </button>
 
       <div class="hidden sm:flex items-center gap-4 pl-2 md:border-l md:border-gray-200 md:pl-4">
-        <a
-          [routerLinkActiveOptions]="{ exact: true }"
-          routerLinkActive="text-emerald-600 font-bold"
-          routerLink="/login"
-          class="flex items-center gap-2 font-medium text-gray-700 transition-colors hover:text-emerald-600 cursor-pointer"
-        >
-          <i class="far fa-user text-lg"></i> Sign In
-        </a>
-        <a
-          [routerLinkActiveOptions]="{ exact: true }"
-          routerLinkActive="text-emerald-600 font-bold"
-          routerLink="/register"
-          class="flex items-center gap-2 font-medium text-gray-700 transition-colors hover:text-emerald-600 cursor-pointer"
-        >
-          <i class="fas fa-user-plus text-lg"></i> Sign Up
-        </a>
+        @if (logged()) {
+          <a
+            class="flex items-center gap-2 font-medium text-gray-700 transition-colors hover:text-emerald-600 cursor-pointer"
+          >
+            SignOut
+          </a>
+        } @else {
+          <a
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLinkActive="text-emerald-600 font-bold"
+            routerLink="/login"
+            class="flex items-center gap-2 font-medium text-gray-700 transition-colors hover:text-emerald-600 cursor-pointer"
+          >
+            <i class="far fa-user text-lg"></i> Sign In
+          </a>
+          <a
+            [routerLinkActiveOptions]="{ exact: true }"
+            routerLinkActive="text-emerald-600 font-bold"
+            routerLink="/register"
+            class="flex items-center gap-2 font-medium text-gray-700 transition-colors hover:text-emerald-600 cursor-pointer"
+          >
+            <i class="fas fa-user-plus text-lg"></i> Sign Up
+          </a>
+        }
       </div>
 
       <!-- dropdown when login -->

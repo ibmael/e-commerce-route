@@ -1,18 +1,23 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
 import { CartService } from '../../core/services/cart.service';
 import { CartResponse } from './models/cart.interface';
+import { isPlatformBrowser } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './cart.html',
   styleUrl: './cart.css',
 })
 export class Cart implements OnInit {
   private readonly cartService = inject(CartService);
+  private readonly platformId = inject(PLATFORM_ID);
   cartDetails = signal<CartResponse>({} as CartResponse);
   ngOnInit(): void {
-    this.getCartData();
+    if (isPlatformBrowser(this.platformId)) {
+      this.getCartData();
+    }
   }
 
   getCartData(): void {

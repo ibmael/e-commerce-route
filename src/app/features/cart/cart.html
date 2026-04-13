@@ -62,6 +62,7 @@
             >
               <div class="flex items-center border border-gray-200 rounded-lg overflow-hidden h-10">
                 <button
+                  (click)="update(item.product.id, item.count - 1)"
                   class="px-3 h-full cursor-pointer text-gray-500 hover:bg-gray-100 transition-colors focus:outline-hidden"
                 >
                   <i class="fa-solid fa-minus text-xs"></i>
@@ -72,6 +73,7 @@
                 }}</span>
 
                 <button
+                  (click)="update(item.product.id, item.count + 1)"
                   class="px-3 h-full bg-[#138D46] cursor-pointer text-white hover:bg-green-700 transition-colors focus:outline-hidden"
                 >
                   <i class="fa-solid fa-plus text-xs"></i>
@@ -86,6 +88,7 @@
               </div>
 
               <button
+                (click)="removeItem(item.product.id)"
                 class="w-10 h-10 flex items-center justify-center bg-red-50 text-red-500 rounded-lg cursor-pointer hover:bg-red-100 transition-colors focus:outline-hidden"
               >
                 <i class="fa-regular fa-trash-can"></i>

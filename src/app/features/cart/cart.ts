@@ -23,4 +23,20 @@ export class Cart implements OnInit {
       },
     });
   }
+  removeItem(id: string): void {
+    this.cartService.removeFromCart(id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.cartDetails.set(res.data);
+      },
+    });
+  }
+  update(id: string, count: number): void {
+    this.cartService.updateCount(id, count).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.cartDetails.set(res.data);
+      },
+    });
+  }
 }

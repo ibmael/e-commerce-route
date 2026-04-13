@@ -23,4 +23,7 @@ export class Navbar implements OnInit {
     }
     initFlowbite();
   }
+  logOut(): void {
+    this.authService.signOut();
+  }
 }

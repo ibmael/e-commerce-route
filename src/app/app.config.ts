@@ -11,6 +11,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import { errorInterceptor } from './core/interceptors/error-interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { loadingInterceptor } from './core/interceptors/loading-interceptor';
+import { headerInterceptor } from './core/interceptors/header-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,7 +22,10 @@ export const appConfig: ApplicationConfig = {
       withInMemoryScrolling({ scrollPositionRestoration: 'top' }),
     ),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch(), withInterceptors([errorInterceptor, loadingInterceptor])),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([errorInterceptor, loadingInterceptor, headerInterceptor]),
+    ),
     provideToastr(),
     importProvidersFrom(NgxSpinnerModule),
   ],

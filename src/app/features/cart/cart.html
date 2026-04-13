@@ -95,6 +95,28 @@
               </button>
             </div>
           </div>
+        } @empty {
+          <div class="text-center px-4 max-w-md mx-auto">
+            <div
+              class="mx-auto flex h-40 w-40 items-center justify-center rounded-full bg-gray-50 mb-8"
+            >
+              <i class="fa-solid fa-box-open text-6xl text-gray-300"></i>
+            </div>
+
+            <h2 class="text-3xl font-bold text-gray-900 mb-4 tracking-tight">Your cart is empty</h2>
+
+            <p class="text-gray-500 mb-10 text-lg leading-relaxed">
+              Looks like you haven't added anything to your cart yet. <br class="hidden sm:block" />
+              Start exploring our products!
+            </p>
+
+            <button
+              class="inline-flex items-center justify-center gap-3 rounded-full bg-emerald-500 px-8 py-4 text-base font-semibold text-white transition-all duration-200 hover:bg-emerald-600 hover:-translate-y-0.5 focus:ring-4 focus:ring-emerald-100 focus:outline-hidden shadow-sm hover:shadow-md cursor-pointer"
+            >
+              Start Shopping
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
         }
 
         <!-- Continue Shopping & clear all  -->
@@ -122,7 +144,9 @@
             <div class="flex items-center gap-3 font-bold text-xl mb-1">
               <i class="fa-solid fa-lock text-green-200"></i> Order Summary
             </div>
-            <div class="text-sm text-green-100 font-medium">2 items in your cart</div>
+            <div class="text-sm text-green-100 font-medium">
+              {{ cartDetails().products.length }} items in your cart
+            </div>
           </div>
 
           <div class="p-6">

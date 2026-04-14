@@ -57,7 +57,6 @@ export const routes: Routes = [
     loadComponent: () => import('./features/checkout/checkout').then((m) => m.Checkout),
     title: 'Secure Checkout | Route Store',
     canActivate: [authGuard],
-    data: { renderMode: 'client' },
   },
   {
     path: 'brands',
@@ -75,7 +74,6 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./features/product-details/product-details').then((m) => m.ProductDetails),
     title: 'Product Details & Information | Route Store',
-    data: { renderMode: 'client' },
   },
   {
     path: 'all-orders',

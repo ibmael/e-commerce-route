@@ -15,6 +15,18 @@ export class CartService {
       productId: id,
     });
   }
+  createCashOrder(cardId: string, data: object): Observable<any> {
+    return this.httpClient.post(`${environment.BASE_URL}/api/v1/orders/${cardId}`, data);
+  }
+  createVisaOrder(cardId: string, data: object): Observable<any> {
+    return this.httpClient.post(
+      `${environment.BASE_URL}/api/v1/orders/${cardId}?url=${environment.url}`,
+      data,
+    );
+  }
+  getUserOrders(userId: string): Observable<any> {
+    return this.httpClient.get(`${environment.BASE_URL}/api/v1/orders/user/${userId}`);
+  }
   getCartData(): Observable<any> {
     return this.httpClient.get(`${environment.BASE_URL}/api/v2/cart`);
   }

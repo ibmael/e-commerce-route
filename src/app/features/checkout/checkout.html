@@ -13,20 +13,17 @@
         </h1>
         <p class="text-gray-500 mt-1">Review your items and complete your purchase</p>
       </div>
-      <a
-        href="#"
-        class="text-brand-600 hover:text-brand-800 font-medium flex items-center gap-2 transition-colors"
-      >
+      <a href="/cart" class="text-brand-600 hover:text-brand-800 font-medium flex items-center gap-2 transition-colors">
         <i class="fa-solid fa-arrow-left-long"></i>
         Back to Cart
       </a>
     </div>
 
     <!-- ? ------------- Form   -->
-    <div class="space-y-6">
+    <form class="space-y-6" (ngSubmit)="submitForm()" [formGroup]="checkOut">
       <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
         <div class="p-6">
-          <form class="space-y-5" (ngSubmit)="submitForm()" [formGroup]="checkOut">
+          <div class="space-y-5">
             <div formGroupName="shippingAddress">
               <!-- city  -->
               <div>
@@ -97,22 +94,11 @@
                   </div>
                 </div>
               </div>
-
-              <button
-                type="submit"
-                class="group cursor-pointer relative flex w-full items-center justify-center gap-2 rounded-xl bg-[#1a8a44] px-6 py-3.5 text-lg font-bold text-white shadow-lg transition-all duration-300 hover:bg-[#157339] hover:shadow-xl focus:ring-4 focus:ring-green-300 active:scale-[0.98]"
-              >
-                <i
-                  class="fa-solid fa-shield-halved text-white transition-transform group-hover:scale-110"
-                ></i>
-
-                <span>Proceed to Payment</span>
-              </button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
-    </div>
+    
     <!-- ? ------------- Payment Method   -->
     <!-- buttons payment  -->
     <div class="group grid pt-3 md:grid-cols-3 gap-8">
@@ -197,6 +183,7 @@
         <div class="pt-2">
           <button
             type="submit"
+            [disabled]="checkOut.invalid || isSubmitting()"
             class="w-full py-3.5 px-4 rounded-lg bg-green-600 text-white font-semibold text-sm flex items-center justify-center gap-2 hover:bg-green-700 transition-colors hidden group-has-[#payment-cod:checked]:flex"
           >
             <i class="fas fa-shopping-bag"></i>
@@ -205,6 +192,7 @@
 
           <button
             type="submit"
+            [disabled]="checkOut.invalid || isSubmitting()"
             class="w-full cursor-pointer py-3.5 px-4 rounded-lg bg-green-600 text-white font-semibold text-sm flex items-center justify-center gap-2 hover:bg-green-700 transition-colors hidden group-has-[#payment-card:checked]:flex"
           >
             <i class="fas fa-shield-alt"></i>
@@ -213,5 +201,6 @@
         </div>
       </div>
     </div>
+    </form>
   </div>
 </section>

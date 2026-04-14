@@ -1,1 +1,47 @@
-<p>not-found works!</p>
+<section class="not-found-page relative overflow-hidden bg-[#f7fcf9] py-16 md:py-24">
+  <span class="decor-circle decor-1"></span>
+  <span class="decor-circle decor-2"></span>
+  <span class="decor-circle decor-3"></span>
+  <span class="decor-leaf leaf-1"><i class="fa-solid fa-leaf"></i></span>
+  <span class="decor-leaf leaf-2"><i class="fa-solid fa-seedling"></i></span>
+
+  <div class="container relative z-10">
+    <div class="mx-auto max-w-2xl rounded-3xl border border-white/80 bg-white/80 p-8 text-center shadow-lg backdrop-blur-xs md:p-12">
+      <div class="relative mx-auto mb-8 w-fit">
+        <div
+          class="flex h-28 w-44 items-center justify-center rounded-2xl border border-gray-100 bg-white shadow-sm"
+        >
+          <i class="fa-solid fa-cart-shopping text-5xl text-[#4ade80]"></i>
+        </div>
+        <div
+          class="absolute -right-7 -top-6 flex h-16 w-16 items-center justify-center rounded-full border-4 border-white bg-[#22c55e] text-2xl font-black text-white shadow-lg"
+        >
+          404
+        </div>
+      </div>
+
+      <h1 class="mb-4 text-4xl font-black tracking-tight text-[#0f172a] md:text-5xl">Oops! Nothing Here</h1>
+      <p class="mx-auto mb-10 max-w-xl text-base leading-7 text-gray-500 md:text-lg">
+        Looks like this page went out of stock! Don&apos;t worry, there&apos;s plenty more fresh content to
+        explore.
+      </p>
+
+      <div class="flex flex-col items-center justify-center gap-3 sm:flex-row">
+        <a
+          routerLink="/home"
+          class="inline-flex min-w-48 items-center justify-center gap-2 rounded-xl bg-[#16a34a] px-6 py-3 text-sm font-bold text-white shadow-md transition-all hover:-translate-y-0.5 hover:bg-[#15803d]"
+        >
+          <i class="fa-solid fa-house"></i>
+          Go to Homepage
+        </a>
+        <button
+          (click)="goBack()"
+          class="inline-flex min-w-48 cursor-pointer items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-6 py-3 text-sm font-bold text-gray-700 transition-colors hover:bg-gray-50"
+        >
+          <i class="fa-solid fa-arrow-left-long"></i>
+          Go Back
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

@@ -21,10 +21,10 @@ export class Navbar implements OnInit {
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platform_Id)) {
-      this.getCartCount();
-      this.getWishlistCount();
       if (localStorage.getItem('freshToken')) {
         this.authService.isLogged.set(true);
+        this.getCartCount();
+        this.getWishlistCount();
       }
     }
     initFlowbite();

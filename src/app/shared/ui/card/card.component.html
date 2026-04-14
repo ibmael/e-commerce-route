@@ -11,9 +11,16 @@
     <!--  ! ----------- Icons  Heart ! ----------- ....  -->
     <div class="absolute top-2 right-2 flex flex-col gap-2">
       <button
-        class="w-10 h-10 bg-white shadow-sm border border-gray-100 rounded-full flex items-center justify-center text-gray-600 hover:bg-emerald-600 hover:text-white transition-all"
+        (click)="addToWishlist(product().id)"
+        class="w-10 h-10 shadow-sm border border-gray-100 rounded-full flex items-center justify-center transition-all"
+        [class.bg-white]="!isInWishlist(product().id)"
+        [class.text-gray-600]="!isInWishlist(product().id)"
+        [class.hover:bg-emerald-600]="!isInWishlist(product().id)"
+        [class.hover:text-white]="!isInWishlist(product().id)"
+        [class.bg-red-50]="isInWishlist(product().id)"
+        [class.text-red-500]="isInWishlist(product().id)"
       >
-        <i class="far fa-heart"></i>
+        <i [class.fas]="isInWishlist(product().id)" [class.far]="!isInWishlist(product().id)" class="fa-heart"></i>
       </button>
 
       <button

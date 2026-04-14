@@ -4,6 +4,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { isPlatformBrowser } from '@angular/common';
 import { CartService } from '../../core/services/cart.service';
+import { WishlistService } from '../../core/services/wish-list.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,12 +15,14 @@ import { CartService } from '../../core/services/cart.service';
 export class Navbar implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly cartService = inject(CartService);
+  private readonly wishlistService = inject(WishlistService);
   private readonly platform_Id = inject(PLATFORM_ID);
   logged = computed(() => this.authService.isLogged());
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platform_Id)) {
       this.getCartCount();
+      this.getWishlistCount();
       if (localStorage.getItem('freshToken')) {
         this.authService.isLogged.set(true);
       }
@@ -28,6 +31,7 @@ export class Navbar implements OnInit {
   }
 
   cartCount = computed(() => this.cartService.cartCount());
+  wishCount = computed(() => this.wishlistService.wishCount());
 
   logOut(): void {
     this.authService.signOut();
@@ -37,6 +41,15 @@ export class Navbar implements OnInit {
     this.cartService.getCartData().subscribe({
       next: (res) => {
         this.cartService.cartCount.set(res.numOfCartItems);
+      },
+    });
+  }
+
+  getWishlistCount(): void {
+    this.wishlistService.getWishlistItems().subscribe({
+      next: (res: any) => {
+        this.wishlistService.wishCount.set(res.count ?? res.data?.length ?? 0);
+        this.wishlistService.wishlistIds.set(res.data?.map((item: any) => item.id) ?? []);
       },
     });
   }

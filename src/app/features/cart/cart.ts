@@ -32,6 +32,7 @@ export class Cart implements OnInit {
     this.cartService.removeFromCart(id).subscribe({
       next: (res) => {
         console.log(res);
+        this.cartService.cartCount.set(res.numOfCartItems);
         this.cartDetails.set(res.data);
       },
     });

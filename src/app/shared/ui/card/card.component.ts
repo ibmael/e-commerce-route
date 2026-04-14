@@ -34,17 +34,30 @@ export class CardComponent {
 
   addToWishlist(id: string): void {
     if (localStorage.getItem('freshToken')) {
-      this.wishlistService.addProuctToWishlist(id).subscribe({
-        next: (response: any) => {
-          if (response.status === 'success') {
-            this.wishlistService.wishlistIds.set(response.data ?? []);
-            this.wishlistService.wishCount.set(
-              response.data?.length ?? this.wishlistService.wishCount(),
-            );
-            this.toastrService.success(response.message, 'freshCart');
-          }
-        },
-      });
+      if (this.isInWishlist(id)) {
+        this.wishlistService.removeProductFromWishlist(id).subscribe({
+          next: (response: any) => {
+            if (response.status === 'success') {
+              const updatedIds = response.data ?? [];
+              this.wishlistService.wishlistIds.set(updatedIds);
+              this.wishlistService.wishCount.set(updatedIds.length);
+              this.toastrService.success(response.message ?? 'Removed from wishlist', 'freshCart');
+            }
+          },
+        });
+      } else {
+        this.wishlistService.addProuctToWishlist(id).subscribe({
+          next: (response: any) => {
+            if (response.status === 'success') {
+              this.wishlistService.wishlistIds.set(response.data ?? []);
+              this.wishlistService.wishCount.set(
+                response.data?.length ?? this.wishlistService.wishCount(),
+              );
+              this.toastrService.success(response.message ?? 'Added to wishlist', 'freshCart');
+            }
+          },
+        });
+      }
     } else {
       this.toastrService.warning(`Please login first`, 'freshCart');
     }

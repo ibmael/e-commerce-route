@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
@@ -16,11 +16,15 @@ export class ProductsService {
     return this.httpclient.get(`${environment.BASE_URL}/api/v1/products/${productId}`);
   }
 
-  getProductsByCategory(categoryId: string): Observable<any> {
+  getProductsByCategory(categoryId: string, pageNumber: number = 1): Observable<any> {
     return this.httpclient
-      .get(`${environment.BASE_URL}/api/v1/products?category[in]=${categoryId}`)
+      .get(`${environment.BASE_URL}/api/v1/products?category[in]=${categoryId}&page=${pageNumber}`)
       .pipe(
-        catchError(() => this.httpclient.get(`${environment.BASE_URL}/api/v1/products?category=${categoryId}`)),
+        catchError(() =>
+          this.httpclient.get(
+            `${environment.BASE_URL}/api/v1/products?category=${categoryId}&page=${pageNumber}`,
+          ),
+        ),
       );
   }
 }
